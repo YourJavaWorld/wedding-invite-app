@@ -15,8 +15,8 @@ const lato = Lato({
 });
 
 export const metadata: Metadata = {
-  title: 'Andreea & Răzvan | Invitație de nuntă',
-  description: 'Invitație digitală de nuntă cu RSVP și dashboard admin.',
+  title: 'Mădălin & Mihaela | Invitație de nuntă',
+  description: 'Vă invităm să sărbătoriți alături de noi. Confirmați prezența până la 20 mai 2027.',
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

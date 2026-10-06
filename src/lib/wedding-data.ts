@@ -11,12 +11,22 @@ export type GuestResponse = {
 };
 
 export const eventInfo = {
-  coupleNames: "Andreea & Răzvan",
-  date: "2026-06-05T17:30:00",
-  venue: "Castelul de la Munte",
-  venueAddress: "Strada Florilor 24, Brașov",
-  dressCode: "Elegant",
-  countDownTitle: "Numărătoarea inversă",
+  coupleNames: "Mădălin & Mihaela",
+  date: "2027-06-05T15:00:00",
+  dateLabel: "05 Iunie 2027",
+  rsvpDeadline: "20.05.2027",
+  ceremony: {
+    venue: "Biserica Icoanei",
+    time: "15:00",
+    address: "Str. Icoanei Nr. 12, București",
+    mapUrl: "https://www.google.com/maps/search/?api=1&query=Biserica+Icoanei%2C+Strada+Icoanei+12%2C+Bucuresti",
+  },
+  reception: {
+    venue: "Jubile Concept",
+    time: "19:00",
+    address: "Str. Emil Racoviță Nr. 7, Voluntari",
+    mapUrl: "https://www.google.com/maps/search/?api=1&query=Jubile+Concept%2C+Strada+Emil+Racovita+7%2C+Voluntari",
+  },
 };
 
 export const initialGuests: GuestResponse[] = [
