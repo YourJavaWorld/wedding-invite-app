@@ -1,0 +1,20 @@
+[
+  {
+    "id": "guest-demo-1",
+    "name": "Maria Popescu",
+    "email": "maria@example.com",
+    "status": "confirmed",
+    "guests": 2,
+    "note": "Ne bucurăm mult! ✨",
+    "createdAt": "2026-10-06T10:00:00.000Z"
+  },
+  {
+    "id": "guest-demo-2",
+    "name": "Alex Ionescu",
+    "email": "alex@example.com",
+    "status": "declined",
+    "guests": 1,
+    "note": "Nu putem participa, dar vă urăm multă fericire.",
+    "createdAt": "2026-10-06T10:30:00.000Z"
+  }
+]
