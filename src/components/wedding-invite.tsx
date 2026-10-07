@@ -142,7 +142,7 @@ export function WeddingInvite({ inviteeName }: { inviteeName?: string }) {
   };
 
   return (
-    <div className="invite-experience invite-background min-h-screen px-2 py-6 text-[#35465f] sm:px-4 sm:py-16">
+    <div className="invite-experience invite-background min-h-screen px-2 py-6 text-[#35281f] sm:px-4 sm:py-16">
       <div aria-hidden="true" className="ambient-petals">
         {Array.from({ length: 12 }, (_, index) => (
           <span key={index} />
@@ -252,18 +252,18 @@ export function WeddingInvite({ inviteeName }: { inviteeName?: string }) {
           className="rsvp-section mx-auto max-w-3xl scroll-mt-8 px-6 py-16 text-center sm:px-12 sm:py-20"
         >
           <div className="mb-8 text-center">
-            <p className="mt-3 text-[0.65rem] uppercase tracking-[0.35em] text-[#967c60]">RSVP</p>
-            <h2 className="mt-3 font-serif text-3xl text-[#59483b] sm:text-4xl">
+            <p className="mt-3 text-[0.65rem] uppercase tracking-[0.35em] text-[#604329]">RSVP</p>
+            <h2 className="mt-3 font-serif text-3xl text-[#392b22] sm:text-4xl">
               Ne-ar bucura să ne confirmați prezența
             </h2>
-            <p className="mt-3 text-sm text-[#776653]">
+            <p className="mt-3 text-sm text-[#493a2d]">
               Până la {eventInfo.rsvpDeadline}
             </p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-5">
             <div className="grid gap-5 sm:grid-cols-2">
-              <label className="block text-sm font-medium text-[#394b65]">
+              <label className="block text-sm font-medium text-[#392b22]">
                 Numele tău
                 <input
                   type="text"
@@ -275,7 +275,7 @@ export function WeddingInvite({ inviteeName }: { inviteeName?: string }) {
                 />
               </label>
 
-              <label className="block text-sm font-medium text-[#394b65]">
+              <label className="block text-sm font-medium text-[#392b22]">
                 Email
                 <input
                   type="email"
@@ -289,7 +289,7 @@ export function WeddingInvite({ inviteeName }: { inviteeName?: string }) {
             </div>
 
             <div className="grid gap-5 sm:grid-cols-2">
-              <label className="block text-sm font-medium text-[#394b65]">
+              <label className="block text-sm font-medium text-[#392b22]">
                 Vei participa?
                 <select
                   value={form.status}
@@ -301,7 +301,7 @@ export function WeddingInvite({ inviteeName }: { inviteeName?: string }) {
                 </select>
               </label>
 
-              <label className="block text-sm font-medium text-[#394b65]">
+              <label className="block text-sm font-medium text-[#392b22]">
                 Număr persoane
                 <input
                   type="number"
@@ -314,7 +314,7 @@ export function WeddingInvite({ inviteeName }: { inviteeName?: string }) {
               </label>
             </div>
 
-            <label className="block text-sm font-medium text-[#394b65]">
+            <label className="block text-sm font-medium text-[#392b22]">
               Mesaj pentru noi
               <textarea
                 value={form.note}
@@ -343,7 +343,7 @@ export function WeddingInvite({ inviteeName }: { inviteeName?: string }) {
         <footer className="py-8 text-center">
           <a
             href="/admin"
-            className="text-xs uppercase tracking-[0.2em] text-[#758094] underline decoration-[#758094]/40 underline-offset-4 hover:text-[#35465f]"
+            className="text-xs uppercase tracking-[0.2em] text-[#604329] underline decoration-[#604329]/50 underline-offset-4 hover:text-[#35281f]"
           >
             Administrare
           </a>
