@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Cormorant_Garamond, Lato } from 'next/font/google';
+import { Allura, Cormorant_Garamond, Lato } from 'next/font/google';
 import './globals.css';
 
 const cormorant = Cormorant_Garamond({
@@ -14,6 +14,12 @@ const lato = Lato({
   weight: ['300', '400', '700'],
 });
 
+const allura = Allura({
+  variable: '--font-seal',
+  subsets: ['latin'],
+  weight: '400',
+});
+
 export const metadata: Metadata = {
   title: 'Mădălin & Mihaela | Invitație de nuntă',
   description: 'Vă invităm să sărbătoriți alături de noi. Confirmați prezența până la 20 mai 2027.',
@@ -21,7 +27,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="ro" className={`${cormorant.variable} ${lato.variable} h-full antialiased`}>
+    <html lang="ro" className={`${allura.variable} ${cormorant.variable} ${lato.variable} h-full antialiased`}>
       <body className="min-h-full bg-[#f7efe8] text-stone-800">{children}</body>
     </html>
   );

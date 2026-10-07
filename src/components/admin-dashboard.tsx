@@ -20,6 +20,9 @@ export function AdminDashboard() {
   const [guests, setGuests] = useState<GuestResponse[]>([]);
   const [search, setSearch] = useState('');
   const [loading, setLoading] = useState(true);
+  const [inviteName, setInviteName] = useState('');
+  const [inviteUrl, setInviteUrl] = useState('');
+  const [inviteLinkMessage, setInviteLinkMessage] = useState('');
 
   const loadGuests = async () => {
     const response = await fetch('/api/guests');
@@ -92,6 +95,32 @@ export function AdminDashboard() {
     await fetch('/api/admin/logout', { method: 'POST' });
     setIsAuthenticated(false);
     setPassword('');
+  };
+
+  const generateInviteLink = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const name = inviteName.trim();
+    if (!name) {
+      setInviteLinkMessage('Introdu numele familiei sau al persoanei invitate.');
+      setInviteUrl('');
+      return;
+    }
+
+    const url = new URL('/', window.location.origin);
+    url.searchParams.set('nume', name);
+    setInviteUrl(url.toString());
+    setInviteLinkMessage('Linkul personalizat a fost generat.');
+  };
+
+  const copyInviteLink = async () => {
+    if (!inviteUrl) return;
+
+    try {
+      await navigator.clipboard.writeText(inviteUrl);
+      setInviteLinkMessage('Linkul a fost copiat.');
+    } catch {
+      setInviteLinkMessage('Nu am putut copia automat linkul. Selectează-l și copiază-l manual.');
+    }
   };
 
   if (loading) {
@@ -177,6 +206,64 @@ export function AdminDashboard() {
             <p className="mt-4 text-3xl font-semibold text-stone-800">{stats.totalGuests}</p>
           </div>
         </div>
+
+        <section className="mt-8 rounded-[1.5rem] border border-stone-200 bg-white p-6 shadow-sm sm:p-8">
+          <div className="max-w-2xl">
+            <p className="text-xs uppercase tracking-[0.3em] text-rose-500">Invitații personalizate</p>
+            <h2 className="mt-2 font-serif text-3xl text-stone-800">Generează un link</h2>
+            <p className="mt-2 text-sm leading-6 text-stone-600">
+              Introdu numele familiei sau al persoanei, apoi trimite-i linkul personalizat.
+            </p>
+          </div>
+
+          <form onSubmit={generateInviteLink} className="mt-5 flex flex-col gap-3 sm:flex-row">
+            <label className="sr-only" htmlFor="invitee-name">Numele invitatului</label>
+            <input
+              id="invitee-name"
+              type="text"
+              value={inviteName}
+              onChange={(event) => {
+                setInviteName(event.target.value);
+                setInviteUrl('');
+                setInviteLinkMessage('');
+              }}
+              maxLength={100}
+              required
+              placeholder="Ex.: Familia Popescu"
+              className="min-w-0 flex-1 rounded-2xl border border-stone-200 bg-stone-50 px-4 py-3 outline-none focus:border-rose-300"
+            />
+            <button
+              type="submit"
+              className="rounded-full bg-stone-800 px-6 py-3 text-xs uppercase tracking-[0.2em] text-white transition hover:bg-stone-700"
+            >
+              Generează link
+            </button>
+          </form>
+
+          {inviteUrl && (
+            <div className="mt-4 flex flex-col gap-3 sm:flex-row">
+              <label className="sr-only" htmlFor="generated-invite-link">Link personalizat</label>
+              <input
+                id="generated-invite-link"
+                type="url"
+                value={inviteUrl}
+                readOnly
+                onFocus={(event) => event.currentTarget.select()}
+                className="min-w-0 flex-1 rounded-2xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-700 outline-none"
+              />
+              <button
+                type="button"
+                onClick={copyInviteLink}
+                className="rounded-full border border-stone-300 bg-white px-6 py-3 text-xs uppercase tracking-[0.2em] text-stone-700 transition hover:bg-stone-50"
+              >
+                Copiază linkul
+              </button>
+            </div>
+          )}
+          {inviteLinkMessage && (
+            <p role="status" className="mt-3 text-sm text-stone-600">{inviteLinkMessage}</p>
+          )}
+        </section>
 
         <div className="mt-8 rounded-[1.5rem] border border-stone-200 bg-white p-4 shadow-sm">
           <input
