@@ -10,24 +10,63 @@ export async function POST(request: Request) {
   try {
     const body = await request.json();
     const name = typeof body.name === 'string' ? body.name.trim() : '';
-    const email = typeof body.email === 'string' ? body.email.trim().toLowerCase() : '';
     const status = (body.status === 'declined' || body.status === 'pending' ? body.status : 'confirmed') as RSVPStatus;
-    const guestsCount = Math.max(1, Number(body.guests) || 1);
+    const guestsCount = Number(body.guests);
+    const childrenCount = Number(body.childrenCount);
+    const vegetarianMeals = Number(body.vegetarianMeals);
+    const allergies = typeof body.allergies === 'string' ? body.allergies.trim() : '';
+    const stayOption = body.stayOption;
+    const transportDeparture = typeof body.transportDeparture === 'string' ? body.transportDeparture : '';
     const note = typeof body.note === 'string' ? body.note.trim() : '';
 
-    if (!name || !email) {
-      return NextResponse.json({ error: 'Name and email are required.' }, { status: 400 });
+    if (!name) {
+      return NextResponse.json({ error: 'Numele este obligatoriu.' }, { status: 400 });
+    }
+    if (name.length > 160) {
+      return NextResponse.json({ error: 'Numele poate avea cel mult 160 de caractere.' }, { status: 400 });
+    }
+    if (allergies.length > 500 || note.length > 1000) {
+      return NextResponse.json({ error: 'Textul pentru alergii sau mesaj este prea lung.' }, { status: 400 });
     }
 
-    const updated = await upsertGuest({
+    if (
+      !Number.isInteger(guestsCount) ||
+      guestsCount < 1 ||
+      guestsCount > 10 ||
+      !Number.isInteger(childrenCount) ||
+      childrenCount < 0 ||
+      childrenCount > guestsCount ||
+      !Number.isInteger(vegetarianMeals) ||
+      vegetarianMeals < 0 ||
+      vegetarianMeals > guestsCount
+    ) {
+      return NextResponse.json({ error: 'Verifică numărul de persoane, copii și meniuri vegetariene.' }, { status: 400 });
+    }
+
+    if (!['none', 'accommodation', 'transport'].includes(stayOption)) {
+      return NextResponse.json({ error: 'Selectează cel mult o opțiune de cazare sau transport.' }, { status: 400 });
+    }
+
+    const validDepartures = ['Casimcea', 'Piatra Neamț'];
+    if (
+      (stayOption === 'transport' && !validDepartures.includes(transportDeparture)) ||
+      (stayOption !== 'transport' && transportDeparture)
+    ) {
+      return NextResponse.json({ error: 'Alege localitatea de plecare pentru transport.' }, { status: 400 });
+    }
+
+    const savedResponse = await upsertGuest({
       name,
-      email,
+      email: null,
       status,
       guests: guestsCount,
+      childrenCount,
+      vegetarianMeals,
+      allergies,
+      stayOption,
+      transportDeparture: stayOption === 'transport' ? transportDeparture : '',
       note,
     });
-
-    const savedResponse = updated.find((guest) => guest.email === email && guest.name.toLowerCase() === name.toLowerCase()) ?? updated[0];
 
     return NextResponse.json({ success: true, guest: savedResponse }, { status: 201 });
   } catch (error) {

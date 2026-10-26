@@ -6,6 +6,11 @@ export type GuestResponse = {
   email: string;
   status: RSVPStatus;
   guests: number;
+  childrenCount: number;
+  vegetarianMeals: number;
+  allergies: string;
+  stayOption: "none" | "accommodation" | "transport";
+  transportDeparture: string;
   note: string;
   createdAt: string;
 };
@@ -14,7 +19,7 @@ export const eventInfo = {
   coupleNames: "Mădălin & Mihaela",
   date: "2027-06-05T15:00:00",
   dateLabel: "05 Iunie 2027",
-  rsvpDeadline: "20.05.2027",
+  rsvpDeadline: "02.05.2027",
   ceremony: {
     venue: "Biserica Icoanei",
     time: "15:00",
@@ -36,6 +41,11 @@ export const initialGuests: GuestResponse[] = [
     email: "maria@example.com",
     status: "confirmed",
     guests: 2,
+    childrenCount: 0,
+    vegetarianMeals: 0,
+    allergies: "",
+    stayOption: "none",
+    transportDeparture: "",
     note: "Ne bucurăm enorm!",
     createdAt: "2025-10-06T12:00:00.000Z",
   },
@@ -45,6 +55,11 @@ export const initialGuests: GuestResponse[] = [
     email: "alex@example.com",
     status: "declined",
     guests: 1,
+    childrenCount: 0,
+    vegetarianMeals: 0,
+    allergies: "",
+    stayOption: "none",
+    transportDeparture: "",
     note: "Ne pare rău, dar nu putem ajunge.",
     createdAt: "2025-10-07T10:30:00.000Z",
   },
@@ -54,14 +69,14 @@ export const initialGuests: GuestResponse[] = [
     email: "elena.andrei@example.com",
     status: "pending",
     guests: 2,
+    childrenCount: 0,
+    vegetarianMeals: 0,
+    allergies: "",
+    stayOption: "none",
+    transportDeparture: "",
     note: "Încă nu știm dacă putem veni.",
     createdAt: "2025-10-08T08:15:00.000Z",
   },
 ];
-
-export const adminCredentials = {
-  email: "admin@wedding.com",
-  password: "admin123",
-};
 
 export const storageKey = "wedding-rsvp-responses-v1";

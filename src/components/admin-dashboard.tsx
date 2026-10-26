@@ -10,6 +10,11 @@ type GuestResponse = {
   email: string;
   status: RSVPStatus;
   guests: number;
+  childrenCount: number;
+  vegetarianMeals: number;
+  allergies: string;
+  stayOption: 'none' | 'accommodation' | 'transport';
+  transportDeparture: string;
   note: string;
   createdAt: string;
 };
@@ -58,7 +63,7 @@ export function AdminDashboard() {
     const value = search.trim().toLowerCase();
     if (!value) return guests;
 
-    return guests.filter((guest) => `${guest.name} ${guest.email}`.toLowerCase().includes(value));
+    return guests.filter((guest) => `${guest.name} ${guest.email} ${guest.allergies}`.toLowerCase().includes(value));
   }, [guests, search]);
 
   const stats = useMemo(() => {
@@ -270,7 +275,7 @@ export function AdminDashboard() {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             type="text"
-            placeholder="Caută după nume sau email"
+            placeholder="Caută după nume, email sau alergii"
             className="w-full rounded-2xl border border-stone-200 bg-stone-50 px-4 py-3 outline-none focus:border-rose-300"
           />
         </div>
@@ -283,6 +288,11 @@ export function AdminDashboard() {
                   <th className="px-5 py-4 text-xs uppercase tracking-[0.25em] text-stone-500">Nume</th>
                   <th className="px-5 py-4 text-xs uppercase tracking-[0.25em] text-stone-500">Email</th>
                   <th className="px-5 py-4 text-xs uppercase tracking-[0.25em] text-stone-500">Persoane</th>
+                  <th className="px-5 py-4 text-xs uppercase tracking-[0.25em] text-stone-500">Copii</th>
+                  <th className="px-5 py-4 text-xs uppercase tracking-[0.25em] text-stone-500">Meniuri vegetariene</th>
+                  <th className="px-5 py-4 text-xs uppercase tracking-[0.25em] text-stone-500">Alergii</th>
+                  <th className="px-5 py-4 text-xs uppercase tracking-[0.25em] text-stone-500">Cazare / transport</th>
+                  <th className="px-5 py-4 text-xs uppercase tracking-[0.25em] text-stone-500">Plecare</th>
                   <th className="px-5 py-4 text-xs uppercase tracking-[0.25em] text-stone-500">Status</th>
                   <th className="px-5 py-4 text-xs uppercase tracking-[0.25em] text-stone-500">Notă</th>
                 </tr>
@@ -291,8 +301,15 @@ export function AdminDashboard() {
                 {filteredGuests.map((guest) => (
                   <tr key={guest.id} className="hover:bg-stone-50/70">
                     <td className="px-5 py-4 font-medium text-stone-800">{guest.name}</td>
-                    <td className="px-5 py-4 text-stone-600">{guest.email}</td>
+                    <td className="px-5 py-4 text-stone-600">{guest.email || '—'}</td>
                     <td className="px-5 py-4 text-stone-600">{guest.guests}</td>
+                    <td className="px-5 py-4 text-stone-600">{guest.childrenCount}</td>
+                    <td className="px-5 py-4 text-stone-600">{guest.vegetarianMeals}</td>
+                    <td className="px-5 py-4 text-stone-600">{guest.allergies || '—'}</td>
+                    <td className="px-5 py-4 text-stone-600">
+                      {guest.stayOption === 'accommodation' ? 'Cazare' : guest.stayOption === 'transport' ? 'Transport' : '—'}
+                    </td>
+                    <td className="px-5 py-4 text-stone-600">{guest.transportDeparture || '—'}</td>
                     <td className="px-5 py-4">
                       <span
                         className={`inline-flex rounded-full px-2.5 py-1 text-xs font-medium uppercase tracking-[0.2em] ${

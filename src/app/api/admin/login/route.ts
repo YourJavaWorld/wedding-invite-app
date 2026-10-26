@@ -6,8 +6,16 @@ export async function POST(request: Request) {
   try {
     const body = await request.json();
     const password = typeof body.password === 'string' ? body.password : '';
+    const adminPassword = getAdminPassword();
 
-    if (password !== getAdminPassword()) {
+    if (!adminPassword) {
+      return NextResponse.json(
+        { ok: false, message: 'Admin login is not configured. Set ADMIN_PASSWORD in the deployment environment.' },
+        { status: 503 },
+      );
+    }
+
+    if (password !== adminPassword) {
       return NextResponse.json({ ok: false, message: 'Invalid password.' }, { status: 401 });
     }
 

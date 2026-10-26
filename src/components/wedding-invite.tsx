@@ -20,20 +20,27 @@ export function WeddingInvite({ inviteeName }: { inviteeName?: string }) {
   const [canScroll, setCanScroll] = useState(false);
   const [hasEntered, setHasEntered] = useState(false);
   const openingTimeout = useRef<number | null>(null);
-  const scrollTimeout = useRef<number | null>(null);
   const openedDoors = useRef(new Set<'left' | 'right'>());
   const [timeLeft, setTimeLeft] = useState(() => formatCountdown(0));
   const [form, setForm] = useState<{
     name: string;
-    email: string;
     status: RSVPStatus;
     guests: number;
+    childrenCount: number;
+    vegetarianMeals: number;
+    allergies: string;
+    stayOption: 'none' | 'accommodation' | 'transport';
+    transportDeparture: string;
     note: string;
   }>({
     name: '',
-    email: '',
     status: 'confirmed',
     guests: 2,
+    childrenCount: 0,
+    vegetarianMeals: 0,
+    allergies: '',
+    stayOption: 'none',
+    transportDeparture: '',
     note: '',
   });
   const [submitted, setSubmitted] = useState(false);
@@ -51,9 +58,6 @@ export function WeddingInvite({ inviteeName }: { inviteeName?: string }) {
       if (openingTimeout.current !== null) {
         window.clearTimeout(openingTimeout.current);
       }
-      if (scrollTimeout.current !== null) {
-        window.clearTimeout(scrollTimeout.current);
-      }
     };
   }, []);
 
@@ -67,6 +71,30 @@ export function WeddingInvite({ inviteeName }: { inviteeName?: string }) {
     return () => {
       document.body.style.overflow = previousOverflow;
     };
+  }, [canScroll]);
+
+  useEffect(() => {
+    if (!canScroll) return;
+
+    const sections = document.querySelectorAll<HTMLElement>('.invite-page .invite-reveal');
+    if (!('IntersectionObserver' in window)) {
+      sections.forEach((section) => section.classList.add('is-revealed'));
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('is-revealed');
+          observer.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -6% 0px' },
+    );
+
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
   }, [canScroll]);
 
   const countdownItems = useMemo(
@@ -108,16 +136,12 @@ export function WeddingInvite({ inviteeName }: { inviteeName?: string }) {
 
     openedDoors.current.clear();
     setIsOpening(true);
+    setCanScroll(true);
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    scrollTimeout.current = window.setTimeout(() => {
-      setCanScroll(true);
-      scrollTimeout.current = null;
-    }, reducedMotion ? 300 : 4200);
     openingTimeout.current = window.setTimeout(() => {
-      setCanScroll(true);
       setHasEntered(true);
       openingTimeout.current = null;
-    }, reducedMotion ? 600 : 7500);
+    }, reducedMotion ? 700 : 4250);
   };
 
   const handleDoorTransitionEnd = (
@@ -131,10 +155,6 @@ export function WeddingInvite({ inviteeName }: { inviteeName?: string }) {
       if (openingTimeout.current !== null) {
         window.clearTimeout(openingTimeout.current);
         openingTimeout.current = null;
-      }
-      if (scrollTimeout.current !== null) {
-        window.clearTimeout(scrollTimeout.current);
-        scrollTimeout.current = null;
       }
       setCanScroll(true);
       setHasEntered(true);
@@ -152,10 +172,11 @@ export function WeddingInvite({ inviteeName }: { inviteeName?: string }) {
       <main
         aria-hidden={!canScroll}
         inert={!canScroll}
-        className={`invite-page relative z-10 mx-auto max-w-4xl ${isOpening ? 'is-opening' : ''} ${canScroll ? 'is-scrollable' : ''} ${hasEntered ? 'is-visible' : ''}`}
+        className={`invite-page relative z-10 mx-auto max-w-4xl ${isOpening ? 'is-opening' : ''} ${hasEntered ? 'is-scrollable is-visible' : ''}`}
       >
         <article className="invitation-paper mx-auto max-w-4xl">
-          <section className="invite-hero relative flex min-h-[86svh] flex-col items-center justify-center px-5 py-20 text-center sm:min-h-[90svh]">
+          <section className="invite-hero relative flex flex-col items-center justify-center px-5 text-center">
+            <p className="invite-hero-eyebrow">Invitație de nuntă</p>
             <svg aria-hidden="true" className="hero-ornament" viewBox="0 0 180 80" fill="none">
               <path d="M90 68C76 45 55 19 21 18c12 4 19 13 22 25C27 33 15 31 5 36c30 2 53 15 70 35m15-3c14-23 35-49 69-50-12 4-19 13-22 25 16-10 28-12 38-7-30 2-53 15-70 35" />
               <path d="M90 9c-9 11-9 22 0 32 9-10 9-21 0-32Z" />
@@ -173,65 +194,71 @@ export function WeddingInvite({ inviteeName }: { inviteeName?: string }) {
             </a>
           </section>
 
-          <div className="invite-details mx-auto max-w-3xl px-6 pb-12 sm:px-12">
-            <section id="poveste" className="invite-section invite-family scroll-mt-8">
+          <div className="invite-details mx-auto">
+            <section id="poveste" className="invite-section invite-family invite-reveal scroll-mt-8">
               {inviteeName && <p className="invite-greeting invite-family-greeting">Dragă {inviteeName},</p>}
-              <p className="invite-copy">Cu binecuvântarea părinților noștri</p>
+              <p className="invite-copy family-intro">
+                Cu binecuvântarea părinților noștri
+              </p>
               <div className="family-names">
                 <p>Elena și Cristian Savin</p>
                 <span aria-hidden="true">&amp;</span>
                 <p>Gabriela și Viorel Bălău</p>
               </div>
+              <svg aria-hidden="true" className="family-ornament" viewBox="0 0 180 36" fill="none">
+                <path d="M90 18H28m124 0H90M90 18c-9-12-19-12-27-8 5 8 14 10 27 8Zm0 0c9-12 19-12 27-8-5 8-14 10-27 8Zm0 0c-9 12-19 12-27 8 5-8 14-10 27-8Zm0 0c9 12 19 12 27 8-5-8-14-10-27-8Z" />
+                <circle cx="90" cy="18" r="3" />
+              </svg>
               <p className="invite-copy godparents-intro">
-                Vă invităm să fiți alături de noi și de nașii noștri
+                Și alături de nașii noștri
               </p>
               <p className="godparents-names">Georgiana și Mihai Donose</p>
+              <p className="family-closing">
+                Vă invităm cu drag să ne fiți alături, să ne bucurăm împreună de această zi specială și să sărbătorim începutul drumului nostru în doi.
+              </p>
             </section>
 
             <section className="invite-section invite-events" aria-label="Momentele nunții">
               <div className="event-timeline">
-                <span aria-hidden="true" className="timeline-connector timeline-connector-top"><span /></span>
-
-                <section className="timeline-event" aria-label="Cununia religioasă">
-                  <p className="invite-eyebrow timeline-event-date">05 iunie 2027</p>
-                  <div className="timeline-icon" aria-hidden="true">
-                    <svg viewBox="0 0 64 64" fill="none">
-                      <path d="M8 55h48M12 51h40M16 47V31h32v16M12 31l20-12 20 12" />
-                      <path d="M22 26V17l5-4 5 4v5M32 19l11-7 7 5v14M24 47V37a8 8 0 0 1 16 0v10M29 47V37a3 3 0 0 1 6 0v10" />
-                      <path d="M32 5v9m-4-5h8M24 30h.1m16 0h.1M46 8v6m-3-3h6M18 34h.1m27-.1h.1" />
-                    </svg>
+                <section className="timeline-event church-event invite-reveal" aria-label="Cununia religioasă">
+                  <svg aria-hidden="true" className="event-illustration church-illustration" viewBox="0 0 96 80" fill="none">
+                    <path pathLength="1" d="M14 68h68M20 68V37l28-19 28 19v31M34 68V45h28v23M44 68V52h8v16M48 10v13m-6-7h12M26 40h44M12 68h72" />
+                    <path pathLength="1" d="M17 37 48 16l31 21M36 45v8m24-8v8" />
+                  </svg>
+                  <div className="event-highlight">
+                    <span className="timeline-time">{eventInfo.ceremony.time}</span>
+                    <span className="event-highlight-note">Cununia religioasă</span>
                   </div>
-                  <p className="timeline-time">{eventInfo.ceremony.time}</p>
-                  <h2 className="timeline-label">Cununia religioasă</h2>
+                  <h2 className="timeline-label">Un legământ binecuvântat</h2>
                   <h3 className="timeline-venue">{eventInfo.ceremony.venue}</h3>
                   <p className="timeline-address">{eventInfo.ceremony.address}</p>
+                  <p className="event-poetry">
+                    În liniștea Bisericii Icoanei, ne vom uni destinele și vom primi binecuvântarea pentru drumul pe care îl începem împreună.
+                  </p>
                   <a href={eventInfo.ceremony.mapUrl} target="_blank" rel="noreferrer" className="invite-map-link">Deschide harta</a>
                 </section>
 
-                <span aria-hidden="true" className="timeline-connector"><span /></span>
-
-                <section className="timeline-event reception-event" aria-label="Petrecerea">
-                  <div className="timeline-icon" aria-hidden="true">
-                    <svg viewBox="0 0 64 64" fill="none">
-                      <path d="M10 48c1-3 5-5 10-5h24c5 0 9 2 10 5H10ZM13 52h38M18 55v2m28-2v2" />
-                      <path d="M17 40c1-10 7-17 15-17s14 7 15 17H17ZM29 23c0-2 1-4 3-4s3 2 3 4" />
-                      <path d="M25 16c0-3 2-5 4-7m6 7c0-3 2-5 4-7M8 23c4 3 4 7 0 10m48-10c-4 3-4 7 0 10" />
-                      <path d="M21 40c1-5 3-9 6-12m16 12c-1-5-3-9-6-12" />
-                    </svg>
+                <section className="timeline-event reception-event invite-reveal" aria-label="Petrecerea">
+                  <svg aria-hidden="true" className="event-illustration reception-illustration" viewBox="0 0 96 80" fill="none">
+                    <path pathLength="1" d="m30 19 6 25a10 10 0 0 0 20 0l6-25H30Zm16 35v15m-12 0h24M62 29h14l-4 17a8 8 0 0 1-16 1M65 55v14m-9 0h18M17 18l2 5m-8 8 5 2m46-18 2-5m9 10 5-2" />
+                    <path pathLength="1" d="M39 32h14m12 4h9" />
+                  </svg>
+                  <div className="event-highlight">
+                    <span className="timeline-time">{eventInfo.reception.time}</span>
+                    <span className="event-highlight-note">Petrecerea</span>
                   </div>
-                  <p className="timeline-time">{eventInfo.reception.time}</p>
-                  <h2 className="timeline-label">Petrecerea</h2>
+                  <h2 className="timeline-label">O seară de sărbătoare</h2>
                   <h3 className="timeline-venue">{eventInfo.reception.venue}</h3>
                   <p className="timeline-address">{eventInfo.reception.address}</p>
-                  <a href={eventInfo.reception.mapUrl} target="_blank" rel="noreferrer" className="invite-map-link">Deschide harta</a>
                   <p className="reception-story">
-                    În urmă cu patru ani, la o petrecere chiar aici, drumurile noastre s-au întâlnit pentru prima oară. Jubile Concept a rămas locul în care a început povestea noastră, iar acum ne întoarcem cu emoție și bucurie să sărbătorim iubirea alături de voi.
+                    În urmă cu patru ani, chiar aici, la Jubile Concept, a început povestea noastră. În ziua nunții, ne întoarcem cu inimile pline de recunoștință, ca să sărbătorim iubirea și să scriem împreună o amintire nouă.
                   </p>
+                  <a href={eventInfo.reception.mapUrl} target="_blank" rel="noreferrer" className="invite-map-link">Deschide harta</a>
                 </section>
               </div>
             </section>
 
-            <section className="invite-countdown invite-section" aria-label="Numărătoarea inversă">
+            <section className="invite-countdown invite-section invite-reveal" aria-label="Numărătoarea inversă">
               <p className="invite-eyebrow">Cu emoție, numărăm clipele</p>
               <h2 className="invite-section-title">Până la ziua noastră cea mare</h2>
               <div className="countdown-grid">
@@ -242,14 +269,14 @@ export function WeddingInvite({ inviteeName }: { inviteeName?: string }) {
                   </div>
                 ))}
               </div>
+              <p className="invitation-script countdown-welcome">Vă așteptăm cu drag!</p>
             </section>
-            <p className="invitation-script countdown-welcome">Vă așteptăm cu drag!</p>
           </div>
         </article>
 
         <section
           id="rsvp"
-          className="rsvp-section mx-auto max-w-3xl scroll-mt-8 px-6 py-16 text-center sm:px-12 sm:py-20"
+          className="rsvp-section invite-reveal mx-auto scroll-mt-8 px-6 text-center"
         >
           <div className="mb-8 text-center">
             <p className="mt-3 text-[0.65rem] uppercase tracking-[0.35em] text-[#604329]">RSVP</p>
@@ -274,45 +301,128 @@ export function WeddingInvite({ inviteeName }: { inviteeName?: string }) {
                   placeholder="Numele complet"
                 />
               </label>
-
-              <label className="block text-sm font-medium text-[#392b22]">
-                Email
-                <input
-                  type="email"
-                  required
-                  value={form.email}
-                  onChange={(e) => setForm((current) => ({ ...current, email: e.target.value }))}
-                  className="mt-2 w-full rounded-sm border border-[#cbd0d7] bg-white px-4 py-3 text-[#26354a] outline-none transition focus:border-[#52637c] focus:ring-2 focus:ring-[#52637c]/15"
-                  placeholder="email@example.com"
-                />
-              </label>
-            </div>
-
-            <div className="grid gap-5 sm:grid-cols-2">
               <label className="block text-sm font-medium text-[#392b22]">
                 Vei participa?
                 <select
                   value={form.status}
-                  onChange={(e) => setForm((current) => ({ ...current, status: e.target.value as RSVPStatus }))}
+                  onChange={(e) => setForm((current) => ({
+                    ...current,
+                    status: e.target.value as RSVPStatus,
+                    ...(e.target.value === 'declined'
+                      ? { childrenCount: 0, vegetarianMeals: 0, allergies: '', stayOption: 'none' as const, transportDeparture: '' }
+                      : {}),
+                  }))}
                   className="mt-2 w-full rounded-sm border border-[#cbd0d7] bg-white px-4 py-3 text-[#26354a] outline-none transition focus:border-[#52637c] focus:ring-2 focus:ring-[#52637c]/15"
                 >
                   <option value="confirmed">Da, vin</option>
                   <option value="declined">Nu, nu pot</option>
                 </select>
               </label>
-
-              <label className="block text-sm font-medium text-[#392b22]">
-                Număr persoane
-                <input
-                  type="number"
-                  min={1}
-                  max={10}
-                  value={form.guests}
-                  onChange={(e) => setForm((current) => ({ ...current, guests: Number(e.target.value) || 1 }))}
-                  className="mt-2 w-full rounded-sm border border-[#cbd0d7] bg-white px-4 py-3 text-[#26354a] outline-none transition focus:border-[#52637c] focus:ring-2 focus:ring-[#52637c]/15"
-                />
-              </label>
             </div>
+
+            {form.status === 'confirmed' && (
+              <>
+                <label className="block text-sm font-medium text-[#392b22]">
+                  Număr persoane
+                  <input
+                    type="number"
+                    min={1}
+                    max={10}
+                    value={form.guests}
+                    onChange={(e) => {
+                      const guests = Math.min(10, Math.max(1, Number(e.target.value) || 1));
+                      setForm((current) => ({
+                        ...current,
+                        guests,
+                        childrenCount: Math.min(current.childrenCount, guests),
+                        vegetarianMeals: Math.min(current.vegetarianMeals, guests),
+                      }));
+                    }}
+                    className="mt-2 w-full rounded-sm border border-[#cbd0d7] bg-white px-4 py-3 text-[#26354a] outline-none transition focus:border-[#52637c] focus:ring-2 focus:ring-[#52637c]/15"
+                  />
+                </label>
+
+                <div className="grid gap-5 sm:grid-cols-2">
+                  <label className="block text-sm font-medium text-[#392b22]">
+                    Număr copii
+                    <select
+                      value={form.childrenCount}
+                      onChange={(e) => setForm((current) => ({ ...current, childrenCount: Number(e.target.value) }))}
+                      className="mt-2 w-full rounded-sm border border-[#cbd0d7] bg-white px-4 py-3 text-[#26354a] outline-none transition focus:border-[#52637c] focus:ring-2 focus:ring-[#52637c]/15"
+                    >
+                      {Array.from({ length: form.guests + 1 }, (_, count) => (
+                        <option key={count} value={count}>{count}</option>
+                      ))}
+                    </select>
+                  </label>
+
+                  <label className="block text-sm font-medium text-[#392b22]">
+                    Număr meniuri vegetariene
+                    <select
+                      value={form.vegetarianMeals}
+                      onChange={(e) => setForm((current) => ({ ...current, vegetarianMeals: Number(e.target.value) }))}
+                      className="mt-2 w-full rounded-sm border border-[#cbd0d7] bg-white px-4 py-3 text-[#26354a] outline-none transition focus:border-[#52637c] focus:ring-2 focus:ring-[#52637c]/15"
+                    >
+                      {Array.from({ length: form.guests + 1 }, (_, count) => (
+                        <option key={count} value={count}>{count}</option>
+                      ))}
+                    </select>
+                  </label>
+                </div>
+
+                <label className="block text-sm font-medium text-[#392b22]">
+                  Alergii sau intoleranțe alimentare
+                  <input
+                    type="text"
+                    value={form.allergies}
+                    onChange={(e) => setForm((current) => ({ ...current, allergies: e.target.value }))}
+                    className="mt-2 w-full rounded-sm border border-[#cbd0d7] bg-white px-4 py-3 text-[#26354a] outline-none transition focus:border-[#52637c] focus:ring-2 focus:ring-[#52637c]/15"
+                  />
+                </label>
+
+                <fieldset className="rsvp-options">
+                  <legend className="text-sm font-medium text-[#f3ead8]">Ai nevoie de...?</legend>
+                  <div className="rsvp-choice-grid">
+                    {[
+                      { value: 'transport', label: 'Transport' },
+                      { value: 'accommodation', label: 'Cazare' },
+                      { value: 'none', label: 'Niciuna' },
+                    ].map((option) => (
+                      <label key={option.value} className="rsvp-choice">
+                        <input
+                          type="radio"
+                          name="stayOption"
+                          value={option.value}
+                          checked={form.stayOption === option.value}
+                          onChange={() => setForm((current) => ({
+                            ...current,
+                            stayOption: option.value as typeof current.stayOption,
+                            transportDeparture: '',
+                          }))}
+                        />
+                        <span>{option.label}</span>
+                      </label>
+                    ))}
+                  </div>
+                </fieldset>
+
+                {form.stayOption === 'transport' && (
+                  <label className="block text-sm font-medium text-[#392b22]">
+                    Localitatea de plecare
+                    <select
+                      required
+                      value={form.transportDeparture}
+                      onChange={(e) => setForm((current) => ({ ...current, transportDeparture: e.target.value }))}
+                      className="mt-2 w-full rounded-sm border border-[#cbd0d7] bg-white px-4 py-3 text-[#26354a] outline-none transition focus:border-[#52637c] focus:ring-2 focus:ring-[#52637c]/15"
+                    >
+                      <option value="">Alege localitatea</option>
+                      <option value="Casimcea">Casimcea</option>
+                      <option value="Piatra Neamț">Piatra Neamț</option>
+                    </select>
+                  </label>
+                )}
+              </>
+            )}
 
             <label className="block text-sm font-medium text-[#392b22]">
               Mesaj pentru noi
@@ -340,19 +450,21 @@ export function WeddingInvite({ inviteeName }: { inviteeName?: string }) {
           </form>
         </section>
 
-        <footer className="py-8 text-center">
-          <a
-            href="/admin"
-            className="text-xs uppercase tracking-[0.2em] text-[#604329] underline decoration-[#604329]/50 underline-offset-4 hover:text-[#35281f]"
-          >
-            Administrare
-          </a>
-        </footer>
+        <section className="invite-closing invite-reveal text-center" aria-label="Încheierea invitației">
+            <svg aria-hidden="true" className="closing-ornament" viewBox="0 0 180 80" fill="none">
+              <path d="M90 68C76 45 55 19 21 18c12 4 19 13 22 25C27 33 15 31 5 36c30 2 53 15 70 35m15-3c14-23 35-49 69-50-12 4-19 13-22 25 16-10 28-12 38-7-30 2-53 15-70 35" />
+              <path d="M90 9c-9 11-9 22 0 32 9-10 9-21 0-32Z" />
+            </svg>
+            <p className="invite-closing-note">Cu drag, vă așteptăm</p>
+            <p className="invite-closing-names invitation-script">{eventInfo.coupleNames}</p>
+            <p className="invite-closing-date">{eventInfo.dateLabel}</p>
+            <span aria-hidden="true" className="invite-closing-heart">♥</span>
+        </section>
       </main>
 
       <section
         aria-hidden={canScroll}
-        className={`glass-door-intro ${isOpening ? 'is-opening' : ''} ${canScroll ? 'is-scroll-unlocked' : ''} ${hasEntered ? 'is-dismissed' : ''}`}
+        className={`glass-door-intro ${isOpening ? 'is-opening' : ''} ${hasEntered ? 'is-scroll-unlocked is-dismissed' : ''}`}
         aria-label="Deschide ușile pentru a vedea invitația de nuntă"
         inert={canScroll}
       >
