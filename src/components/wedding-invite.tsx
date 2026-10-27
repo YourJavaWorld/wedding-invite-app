@@ -226,8 +226,8 @@ export function WeddingInvite({ inviteeName }: { inviteeName?: string }) {
                     <path pathLength="1" d="M17 37 48 16l31 21M36 45v8m24-8v8" />
                   </svg>
                   <div className="event-highlight">
-                    <span className="timeline-time">{eventInfo.ceremony.time}</span>
                     <span className="event-highlight-note">Cununia religioasă</span>
+                    <span className="timeline-time">{eventInfo.ceremony.time}</span>
                   </div>
                   <h2 className="timeline-label">Un legământ binecuvântat</h2>
                   <h3 className="timeline-venue">{eventInfo.ceremony.venue}</h3>
@@ -244,8 +244,8 @@ export function WeddingInvite({ inviteeName }: { inviteeName?: string }) {
                     <path pathLength="1" d="M39 32h14m12 4h9" />
                   </svg>
                   <div className="event-highlight">
-                    <span className="timeline-time">{eventInfo.reception.time}</span>
                     <span className="event-highlight-note">Petrecerea</span>
+                    <span className="timeline-time">{eventInfo.reception.time}</span>
                   </div>
                   <h2 className="timeline-label">O seară de sărbătoare</h2>
                   <h3 className="timeline-venue">{eventInfo.reception.venue}</h3>
