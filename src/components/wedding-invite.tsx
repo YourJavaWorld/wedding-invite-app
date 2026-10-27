@@ -240,8 +240,9 @@ export function WeddingInvite({ inviteeName }: { inviteeName?: string }) {
 
                 <section className="timeline-event reception-event invite-reveal" aria-label="Petrecerea">
                   <svg aria-hidden="true" className="event-illustration reception-illustration" viewBox="0 0 96 80" fill="none">
-                    <path pathLength="1" d="M36 18h24l-4 20a8 8 0 0 1-16 0l-4-20Zm8 29v15m-10 0h28M20 24l5 8m-9 5 9 2m47-15-5 8m9 5-9 2M29 17l-5-5m47 5 5-5M48 12V7m-5 5h10" />
-                    <path pathLength="1" d="M41 25h14m-12 7h10M27 67h42" />
+                    <path pathLength="1" d="M23 18h22l-3 18a8 8 0 0 1-16 0l-3-18Zm11 28v15m-10 3h20" transform="rotate(-12 34 40)" />
+                    <path pathLength="1" d="M51 18h22l-3 18a8 8 0 0 1-16 0l-3-18Zm11 28v15m-10 3h20" transform="rotate(12 62 40)" />
+                    <path pathLength="1" d="m47 14 2 4 4 1-4 2-2 4-2-4-4-2 4-1 2-4Zm-25 8 1 2 2 1-2 1-1 2-1-2-2-1 2-1 1-2m51 0 1 2 2 1-2 1-1 2-1-2-2-1 2-1 1-2" />
                   </svg>
                   <div className="event-highlight">
                     <span className="event-highlight-note">Petrecerea</span>
