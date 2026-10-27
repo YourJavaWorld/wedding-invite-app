@@ -662,12 +662,11 @@ h4 {
   margin-bottom: 1rem;
   padding: 0.8rem 1.5rem 0.9rem;
   border: 1px solid rgba(225, 194, 124, 0.75);
-  margin-top: 0.55rem;
-  color: #604329;
-  font-size: 0.63rem;
-  font-weight: 600;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
+   background:
+    radial-gradient(ellipse at 50% 0%, rgba(117, 123, 75, 0.25), transparent 70%),
+    linear-gradient(145deg, var(--invite-forest), var(--invite-forest-deep));
+  box-shadow: 0 7px 20px rgba(37, 45, 27, 0.14);
+  color: #f7efdf;
 }
 
 .church-event {
@@ -687,9 +686,9 @@ h4 {
 
 .event-highlight-note {
   color: #e3d8bf;
-  font-size: 0.55rem;
+  font-size: 0.75rem;
   font-weight: 600;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
 }
 
