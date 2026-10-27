@@ -343,8 +343,6 @@ h4 {
   min-height: min(850px, calc(100svh - 1.5rem));
   overflow: hidden;
   background:
-    linear-gradient(180deg, rgba(57, 68, 49, 0.48), rgba(57, 68, 49, 0.82)),
-    url("/images/invitation-background.jpeg") center / cover,
     linear-gradient(150deg, var(--invite-forest), var(--invite-forest-deep));
   color: #f7efdf;
 }
