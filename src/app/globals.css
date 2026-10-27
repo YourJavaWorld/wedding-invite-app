@@ -62,6 +62,11 @@ h4 {
     linear-gradient(155deg, var(--invite-forest), var(--invite-forest-deep) 72%);
 }
 
+/* A more editorial frame keeps the stained-glass artwork as the visual anchor. */
+.invite-experience {
+  --invite-paper: #f7f0e5;
+}
+
 .ambient-petals {
   position: fixed;
   z-index: 11;
@@ -321,10 +326,10 @@ h4 {
   isolation: isolate;
   overflow: hidden;
   width: 100%;
-  max-width: 576px;
+  max-width: 720px;
   color: #35281f;
   border: 1px solid rgba(184, 152, 93, 0.72);
-  background: #f4ecdf;
+  background: var(--invite-paper);
   box-shadow: 0 28px 90px rgba(10, 16, 8, 0.32), 0 0 0 7px rgba(184, 152, 93, 0.08);
 }
 
@@ -335,17 +340,18 @@ h4 {
 
 .invite-hero {
   position: relative;
-  min-height: calc(100svh - 1.5rem);
+  min-height: min(850px, calc(100svh - 1.5rem));
   overflow: hidden;
   background:
-    radial-gradient(ellipse at 50% 38%, rgba(117, 123, 75, 0.22), transparent 52%),
+    linear-gradient(180deg, rgba(37, 45, 27, 0.48), rgba(37, 45, 27, 0.82)),
+    url("/images/invitation-background.jpeg") center / cover,
     linear-gradient(150deg, var(--invite-forest), var(--invite-forest-deep));
   color: #f7efdf;
 }
 
 .invite-hero::before {
   position: absolute;
-  inset: 1.1rem;
+  inset: clamp(1rem, 4vw, 2rem);
   border: 1px solid rgba(225, 194, 124, 0.58);
   content: "";
   pointer-events: none;
@@ -390,8 +396,9 @@ h4 {
   max-width: 100%;
   margin-top: 0;
   color: #f7efdf;
-  font-size: clamp(2rem, 9vw, 3.25rem);
-  line-height: 1.05;
+  font-size: clamp(2.8rem, 10vw, 5rem);
+  line-height: 0.98;
+  text-shadow: 0 3px 24px rgba(0, 0, 0, 0.25);
   text-wrap: balance;
   animation: names-arrive 1.2s both;
 }
@@ -434,7 +441,7 @@ h4 {
   margin-top: 1rem;
   color: #e3d8bf;
   font-family: var(--font-display), Georgia, serif;
-  font-size: clamp(1.65rem, 6.3vw, 2.6rem);
+  font-size: clamp(1.35rem, 5vw, 2.15rem);
   letter-spacing: 0.08em;
 }
 
@@ -470,7 +477,7 @@ h4 {
 }
 
 .invite-section {
-  padding-block: clamp(4.2rem, 13vw, 7.5rem);
+  padding-block: clamp(3.5rem, 9vw, 6rem);
   text-align: center;
 }
 
@@ -479,7 +486,7 @@ h4 {
   padding: clamp(4rem, 12vw, 6rem) clamp(1.5rem, 6vw, 3rem);
   background:
     radial-gradient(ellipse at 50% 50%, rgba(216, 169, 154, 0.1), transparent 62%),
-    #f4ecdf;
+    var(--invite-paper);
 }
 
 .invite-family-greeting {
@@ -584,11 +591,13 @@ h4 {
 }
 
 .invite-events {
-  padding: clamp(2.5rem, 7vw, 4rem) 0;
+  padding: clamp(2rem, 5vw, 3.5rem) 0;
 }
 
 .event-timeline {
   display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: stretch;
   gap: clamp(2.5rem, 7vw, 4rem);
   margin: 0;
 }
@@ -599,12 +608,12 @@ h4 {
   flex-direction: column;
   align-items: center;
   overflow: hidden;
-  padding: 0 clamp(1.25rem, 5vw, 2rem) 2.5rem;
+  padding: 0 clamp(1rem, 3vw, 2rem) 2.5rem;
   text-align: center;
   background:
     linear-gradient(180deg, rgba(48, 56, 32, 0.035), transparent 5rem),
     radial-gradient(ellipse at 50% 0%, rgba(216, 169, 154, 0.11), transparent 52%),
-    #f4ecdf;
+    var(--invite-paper);
 }
 
 .timeline-event::before {
@@ -696,7 +705,7 @@ h4 {
   margin-top: 0.55rem;
   color: #392b22;
   font-family: var(--font-display), Georgia, serif;
-  font-size: 1.75rem;
+  font-size: clamp(1.4rem, 3vw, 1.75rem);
 }
 
 .timeline-address {
@@ -748,7 +757,7 @@ h4 {
 .invite-closing {
   position: relative;
   width: 100%;
-  max-width: 576px;
+  max-width: 720px;
   margin: 0 auto;
   overflow: hidden;
   padding: clamp(3.5rem, 10vw, 5rem) 1.5rem;
@@ -886,7 +895,7 @@ h4 {
 
 .rsvp-section {
   width: 100%;
-  max-width: 576px;
+  max-width: 720px;
   padding: clamp(4rem, 12vw, 6rem) clamp(1.5rem, 6vw, 3rem);
   color: #392b22;
   border-top: 1px solid rgba(184, 152, 93, 0.72);
@@ -929,6 +938,19 @@ h4 {
 .rsvp-section form > .grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.75rem;
+}
+
+.rsvp-section form > label,
+.rsvp-section form > .grid > label {
+  text-align: left;
+}
+
+.rsvp-section form > label input,
+.rsvp-section form > label textarea,
+.rsvp-section form > label select,
+.rsvp-section form > .grid > label input,
+.rsvp-section form > .grid > label select {
+  border-radius: 0.75rem;
 }
 
 .rsvp-options {
@@ -996,6 +1018,9 @@ h4 {
 }
 
 .rsvp-section button[type="submit"] {
+  min-height: 3.25rem;
+  border-radius: 999px;
+  letter-spacing: 0.16em;
   background: #b8985d;
   color: #252d1b;
 }
@@ -1045,6 +1070,28 @@ h4 {
 }
 
 @media (max-width: 640px) {
+  .invite-experience {
+    padding-right: 0.75rem;
+    padding-left: 0.75rem;
+  }
+
+  .invitation-paper {
+    max-width: 32rem;
+  }
+
+  .invite-hero {
+    min-height: min(760px, calc(100svh - 1.5rem));
+    background-position: center;
+  }
+
+  .event-timeline {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .timeline-event {
+    padding-bottom: 2rem;
+  }
+
   .rsvp-section form label {
     font-size: 0.75rem;
   }
@@ -1056,6 +1103,10 @@ h4 {
   }
 
   .rsvp-choice-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .rsvp-section form > .grid {
     grid-template-columns: minmax(0, 1fr);
   }
 
