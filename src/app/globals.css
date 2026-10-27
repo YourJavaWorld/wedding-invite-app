@@ -683,10 +683,14 @@ h4 {
 }
 
 .event-highlight-note {
-  color: #e3d8bf;
+  color: #f1d998;
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 1.9rem;
+  line-height: 1;
+  /* color: #e3d8bf;
   font-size: 0.75rem;
   font-weight: 600;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.14em; */
   text-transform: uppercase;
 }
 

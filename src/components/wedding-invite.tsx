@@ -163,11 +163,11 @@ export function WeddingInvite({ inviteeName }: { inviteeName?: string }) {
 
   return (
     <div className="invite-experience invite-background min-h-screen px-2 py-6 text-[#35281f] sm:px-4 sm:py-16">
-      <div aria-hidden="true" className="ambient-petals">
+      {/* <div aria-hidden="true" className="ambient-petals">
         {Array.from({ length: 12 }, (_, index) => (
           <span key={index} />
         ))}
-      </div>
+      </div> */}
 
       <main
         aria-hidden={!canScroll}
