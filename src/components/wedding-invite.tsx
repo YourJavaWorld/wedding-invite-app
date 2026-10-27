@@ -222,8 +222,8 @@ export function WeddingInvite({ inviteeName }: { inviteeName?: string }) {
               <div className="event-timeline">
                 <section className="timeline-event church-event invite-reveal" aria-label="Cununia religioasă">
                   <svg aria-hidden="true" className="event-illustration church-illustration" viewBox="0 0 96 80" fill="none">
-                    <path pathLength="1" d="M14 68h68M20 68V37l28-19 28 19v31M34 68V45h28v23M44 68V52h8v16M48 10v13m-6-7h12M26 40h44M12 68h72" />
-                    <path pathLength="1" d="M17 37 48 16l31 21M36 45v8m24-8v8" />
+                    <path pathLength="1" d="M48 10v13m-6-7h12M18 38 48 18l30 20M24 37v31m48-31v31M17 68h62M31 68V45h34v23M43 68V54a5 5 0 0 1 10 0v14" />
+                    <path pathLength="1" d="M29 36h38M48 27v8m-23 5h46M37 49h22" />
                   </svg>
                   <div className="event-highlight">
                     <span className="event-highlight-note">Cununia religioasă</span>
@@ -240,8 +240,8 @@ export function WeddingInvite({ inviteeName }: { inviteeName?: string }) {
 
                 <section className="timeline-event reception-event invite-reveal" aria-label="Petrecerea">
                   <svg aria-hidden="true" className="event-illustration reception-illustration" viewBox="0 0 96 80" fill="none">
-                    <path pathLength="1" d="m30 19 6 25a10 10 0 0 0 20 0l6-25H30Zm16 35v15m-12 0h24M62 29h14l-4 17a8 8 0 0 1-16 1M65 55v14m-9 0h18M17 18l2 5m-8 8 5 2m46-18 2-5m9 10 5-2" />
-                    <path pathLength="1" d="M39 32h14m12 4h9" />
+                    <path pathLength="1" d="M36 18h24l-4 20a8 8 0 0 1-16 0l-4-20Zm8 29v15m-10 0h28M20 24l5 8m-9 5 9 2m47-15-5 8m9 5-9 2M29 17l-5-5m47 5 5-5M48 12V7m-5 5h10" />
+                    <path pathLength="1" d="M41 25h14m-12 7h10M27 67h42" />
                   </svg>
                   <div className="event-highlight">
                     <span className="event-highlight-note">Petrecerea</span>
