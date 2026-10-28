@@ -293,11 +293,12 @@ export function WeddingInvite({ inviteeName }: { inviteeName?: string }) {
           <div className="mb-8 text-center">
             <p className="mt-3 text-[0.65rem] uppercase tracking-[0.35em] text-[#604329]">RSVP</p>
             <h2 className="mt-3 font-serif text-3xl text-[#392b22] sm:text-4xl">
-              Ne-ar bucura să ne confirmați prezența
+              Ne-ar bucura să ne confirmați prezența până la
+              {eventInfo.rsvpDeadline}
             </h2>
-            <p className="mt-3 text-sm text-[#493a2d]">
+            {/* <p className="mt-3 text-sm text-[#493a2d]">
               Până la {eventInfo.rsvpDeadline}
-            </p>
+            </p> */}
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-5">
