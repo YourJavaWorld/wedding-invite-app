@@ -480,7 +480,7 @@ h4 {
   background:
     linear-gradient(180deg, rgba(48, 56, 32, 0.035), transparent 5rem),
     radial-gradient(ellipse at 50% 0%, rgba(216, 169, 154, 0.11), transparent 52%),
-    #f4ecdf; /* Changed to #f4ecdf for events alignment */
+    var(--invite-paper);
 }
 
 .invite-family-greeting {
