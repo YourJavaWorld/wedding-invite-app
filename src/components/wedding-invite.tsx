@@ -281,7 +281,7 @@ export function WeddingInvite({ inviteeName }: { inviteeName?: string }) {
                   </div>
                 ))}
               </div>
-              <p className="invitation-script countdown-welcome">Vă așteptăm cu drag!</p>
+              <p className="countdown-welcome">Vă așteptăm cu drag!</p>
             </section>
           </div>
         </article>
