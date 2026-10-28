@@ -21,7 +21,7 @@ const allura = Allura({
 });
 
 export const metadata: Metadata = {
-  title: 'Mădălin & Mihaela | Invitație de nuntă',
+  title: 'Mihaela & Mădălin| Invitație de nuntă',
   description: 'Vă invităm să sărbătoriți alături de noi. Confirmați prezența până la 20 mai 2027.',
 };
 

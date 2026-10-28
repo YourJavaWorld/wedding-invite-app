@@ -212,9 +212,9 @@ export function WeddingInvite({ inviteeName }: { inviteeName?: string }) {
                 Cu binecuvântarea părinților noștri
               </p>
               <div className="family-names">
-                <p>Elena și Cristian Savin</p>
+                 <p>Gabriela și Viorel Bălău</p>
                 <span aria-hidden="true">&amp;</span>
-                <p>Gabriela și Viorel Bălău</p>
+                 <p>Elena și Cristian Savin</p>
               </div>
               <svg aria-hidden="true" className="family-ornament" viewBox="0 0 180 36" fill="none">
                 <path d="M90 18H28m124 0H90M90 18c-9-12-19-12-27-8 5 8 14 10 27 8Zm0 0c9-12 19-12 27-8-5 8-14 10-27 8Zm0 0c-9 12-19 12-27 8 5-8 14-10 27-8Zm0 0c9 12 19 12 27 8-5-8-14-10-27-8Z" />
@@ -476,6 +476,7 @@ export function WeddingInvite({ inviteeName }: { inviteeName?: string }) {
 
       <section
         aria-hidden={canScroll}
+        onClick={openInvitation}
         className={`glass-door-intro ${isOpening ? 'is-opening' : ''} ${hasEntered ? 'is-scroll-unlocked is-dismissed' : ''}`}
         aria-label="Deschide ușile pentru a vedea invitația de nuntă"
         inert={canScroll}
@@ -503,9 +504,8 @@ export function WeddingInvite({ inviteeName }: { inviteeName?: string }) {
             <button
               type="button"
               className="wax-seal"
-              onClick={openInvitation}
               disabled={isOpening}
-              aria-label="Deschide ușile apăsând sigiliul M și M"
+              aria-label="Deschide ușile"
             >
               <span aria-hidden="true" className="wax-seal-lettering">
                 <span className="wax-seal-initial">M</span>

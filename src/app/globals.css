@@ -333,7 +333,7 @@ h4 {
   color: #35281f;
   border: 1px solid rgba(184, 152, 93, 0.72);
   background: var(--invite-paper);
-  /* box-shadow: 0 28px 90px rgba(10, 16, 8, 0.32), 0 0 0 7px rgba(184, 152, 93, 0.08); */
+  box-shadow: 0 28px 90px rgba(36, 97, 16, 0.32), 0 0 0 7px rgba(22, 111, 28, 0.374);
 }
 
 .invitation-script {
