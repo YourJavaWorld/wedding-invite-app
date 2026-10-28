@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { eventInfo, type RSVPStatus } from '@/lib/wedding-data';
 
 const targetDate = new Date(eventInfo.date).getTime();
+const [firstPartnerName, secondPartnerName] = eventInfo.coupleNames.split(' & ');
 
 function formatCountdown(ms: number) {
   const totalSeconds = Math.max(0, Math.floor(ms / 1000));
@@ -188,15 +189,13 @@ export function WeddingInvite({ inviteeName }: { inviteeName?: string }) {
         <article className="invitation-paper mx-auto max-w-4xl">
           <section className="invite-hero relative flex flex-col items-center justify-center px-5 text-center">
             <p className="invite-hero-eyebrow">Invitație de nuntă</p>
-            <svg aria-hidden="true" className="hero-ornament" viewBox="0 0 180 80" fill="none">
-              <path d="M90 68C76 45 55 19 21 18c12 4 19 13 22 25C27 33 15 31 5 36c30 2 53 15 70 35m15-3c14-23 35-49 69-50-12 4-19 13-22 25 16-10 28-12 38-7-30 2-53 15-70 35" />
-              <path d="M90 9c-9 11-9 22 0 32 9-10 9-21 0-32Z" />
-            </svg>
-            <h1 className="invite-hero-names invitation-script">{eventInfo.coupleNames}</h1>
+            <h1 className="invite-hero-names invitation-script">
+              <span>{firstPartnerName} &amp;</span>
+              <span>{secondPartnerName}</span>
+            </h1>
             <p className="invite-hero-date">{eventInfo.dateLabel}</p>
             <span aria-hidden="true" className="invite-hero-divider">
               <span />
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.8c-1.1 4.6-5.2 5.1-5.2 9.2A5.2 5.2 0 0 0 12 17.2a5.2 5.2 0 0 0 5.2-5.2c0-4.1-4.1-4.6-5.2-9.2Zm0 17.1c-2.4 0-4.3 1.1-4.3 2.4h8.6c0-1.3-1.9-2.4-4.3-2.4Z" /></svg>
               <span />
             </span>
             <a href="#poveste" className="invite-scroll-cue" aria-label="Derulează pentru detaliile invitației">
