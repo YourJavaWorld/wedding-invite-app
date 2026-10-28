@@ -292,7 +292,7 @@ export function WeddingInvite({ inviteeName }: { inviteeName?: string }) {
         >
           <div className="mb-8 text-center">
             <p className="mt-3 text-[0.65rem] uppercase tracking-[0.35em] text-[#604329]">RSVP</p>
-            <h2 className="mt-3 font-serif text-2xl text-[#392b22] sm:text-4xl">
+            <h2 className="mt-3 font-serif text-2xl text-[#392b22] sm:text-3xl">
               Ne-ar bucura să ne confirmați prezența până la 
             </h2>
              <h2 className="mt-3 font-serif text-3xl text-[#392b22] sm:text-4xl">
