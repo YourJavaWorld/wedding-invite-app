@@ -478,7 +478,8 @@ h4 {
   border-top: 1px solid rgba(70, 48, 31, 0.2);
   padding: clamp(4rem, 12vw, 6rem) clamp(1.5rem, 6vw, 3rem);
   background:
-    radial-gradient(ellipse at 50% 50%, rgba(216, 169, 154, 0.1), transparent 62%),
+    linear-gradient(180deg, rgba(48, 56, 32, 0.035), transparent 5rem),
+    radial-gradient(ellipse at 50% 0%, rgba(216, 169, 154, 0.11), transparent 52%),
     var(--invite-paper);
 }
 

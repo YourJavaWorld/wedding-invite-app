@@ -206,7 +206,7 @@ export function WeddingInvite({ inviteeName }: { inviteeName?: string }) {
           </section>
 
           <div className="invite-details mx-auto">
-            <section id="poveste" className="invite-section invite-family invite-reveal scroll-mt-8">
+            <section id="poveste" className="invite-section invite-family invite-reveal scroll-mt-6">
               {inviteeName && <p className="invite-greeting invite-family-greeting">Dragă {inviteeName},</p>}
               <p className="invite-copy family-intro">
                 Cu binecuvântarea părinților noștri
@@ -295,7 +295,7 @@ export function WeddingInvite({ inviteeName }: { inviteeName?: string }) {
             <h2 className="mt-3 font-serif text-2xl text-[#392b22] sm:text-3xl">
               Ne-ar bucura să ne confirmați prezența până la:
             </h2>
-             <h2 className="mt-2 font-serif text-3xl text-[#392b22] sm:text-4xl">
+             <h2 className="mt-1 font-serif text-3xl text-[#392b22] sm:text-4xl">
               {eventInfo.rsvpDeadline}
             </h2>
             {/* <p className="mt-3 text-sm text-[#493a2d]">
