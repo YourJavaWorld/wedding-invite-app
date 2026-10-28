@@ -1141,3 +1141,163 @@ h4 {
     line-height: 1.2;
   }
 }
+
+/* Invitation text palette and consistent three-step type scale */
+.invite-experience {
+  --invite-ink: #35281f;
+  --invite-white: #f7efdf;
+  --invite-gold-on-paper: #8a672a;
+  --invite-gold-on-dark: #e1c27c;
+  --invite-title-size: clamp(1.5rem, 5vw, 2rem);
+  --invite-body-size: 1rem;
+  --invite-note-size: 0.75rem;
+  font-size: var(--invite-body-size);
+}
+
+.invite-experience :is(p, h1, h2, h3, h4, a, label, legend, button, input, select, textarea, span, em, i, cite, blockquote) {
+  font-style: normal !important;
+}
+
+.invite-experience :is(p, a, label, legend, button, input, select, textarea, span) {
+  font-size: var(--invite-body-size) !important;
+}
+
+.invite-experience :is(h1, h2, h3, h4, .invite-greeting, .godparents-names, .invite-hero-names, .invite-section-title, .timeline-venue, .timeline-time, .countdown-value, .countdown-welcome, .invite-closing-names) {
+  font-size: var(--invite-title-size) !important;
+}
+
+.invite-experience :is(.invite-hero-eyebrow, .invite-eyebrow, .invite-copy, .timeline-label, .event-highlight-note, .invite-map-link, .invite-closing-note, .countdown-label) {
+  font-size: var(--invite-note-size) !important;
+}
+
+/* Light invitation paper: ink and gold text only. */
+.invite-experience :is(.invite-family, .timeline-event) {
+  color: var(--invite-ink);
+}
+
+.invite-experience :is(.invite-family, .timeline-event) :is(p, h1, h2, h3, h4, span, a) {
+  color: var(--invite-ink) !important;
+}
+
+.invite-experience :is(.family-intro, .godparents-intro, .timeline-label, .event-highlight-note, .invite-map-link) {
+  color: var(--invite-gold-on-paper) !important;
+}
+
+.invite-experience .family-closing {
+  color: var(--invite-gold-on-paper) !important;
+  font-style: normal !important;
+}
+
+/* Dark invitation panels: white and gold text only. */
+.invite-experience :is(.invite-hero, .invite-countdown, .rsvp-section, .invite-closing) {
+  color: var(--invite-white);
+}
+
+.invite-experience :is(.invite-hero, .invite-countdown, .rsvp-section, .invite-closing) :is(p, h1, h2, h3, h4, a, label, legend, button, span) {
+  color: var(--invite-white) !important;
+}
+
+.invite-experience :is(.invite-hero-eyebrow, .invite-hero-date, .invite-eyebrow, .countdown-label, .invite-closing-note, .invite-closing-date, .invite-hero-divider, .invite-map-link) {
+  color: var(--invite-gold-on-dark) !important;
+}
+
+.invite-experience .event-highlight {
+  background: var(--invite-gold-on-paper);
+  color: var(--invite-ink);
+}
+
+.invite-experience .event-highlight :is(.timeline-time, .event-highlight-note) {
+  color: var(--invite-gold-on-dark) !important;
+}
+
+.invite-experience .invite-countdown .countdown-value {
+  color: var(--invite-gold-on-dark) !important;
+}
+
+.invite-experience .rsvp-section :is(input, select, textarea) {
+  border-color: var(--invite-gold-on-dark) !important;
+  background: rgba(247, 239, 223, 0.1) !important;
+  color: var(--invite-white) !important;
+  font-size: var(--invite-body-size) !important;
+}
+
+.invite-experience .rsvp-section :is(input, textarea)::placeholder {
+  color: var(--invite-gold-on-dark) !important;
+}
+
+.invite-experience .rsvp-section select option {
+  background: var(--invite-ink);
+  color: var(--invite-white);
+}
+
+.invite-experience .rsvp-section [role="status"] {
+  border-color: var(--invite-gold-on-dark) !important;
+  background: rgba(247, 239, 223, 0.1) !important;
+  color: var(--invite-white) !important;
+}
+
+.invite-experience .rsvp-section button[type="submit"] {
+  background: var(--invite-gold-on-dark) !important;
+  color: var(--invite-ink) !important;
+}
+
+.invite-experience .invite-family :is(p, h1, h2, h3, h4, span, a) {
+  color: var(--invite-ink) !important;
+}
+
+.invite-experience .invite-family :is(.family-intro, .godparents-intro) {
+  color: var(--invite-gold-on-paper) !important;
+}
+
+.invite-experience .invite-family .family-closing {
+  color: var(--invite-gold-on-dark) !important;
+}
+
+.invite-experience .timeline-event :is(p, h1, h2, h3, h4, span, a) {
+  color: var(--invite-ink) !important;
+}
+
+.invite-experience .timeline-event :is(.timeline-label, .invite-map-link) {
+  color: var(--invite-gold-on-paper) !important;
+}
+
+.invite-experience .event-highlight :is(.timeline-time, .event-highlight-note) {
+  color: var(--invite-gold-on-dark) !important;
+}
+
+.invite-experience :is(.invite-hero, .invite-countdown, .rsvp-section, .invite-closing) :is(p, h1, h2, h3, h4, a, label, legend, button, span) {
+  color: var(--invite-white) !important;
+}
+
+.invite-experience :is(.invite-hero, .invite-countdown, .rsvp-section, .invite-closing) :is(.invite-hero-eyebrow, .invite-hero-date, .invite-eyebrow, .countdown-label, .invite-closing-note, .invite-closing-date, .invite-hero-divider, .invite-map-link, legend) {
+  color: var(--invite-gold-on-dark) !important;
+}
+
+.invite-experience .invite-countdown .countdown-value {
+  color: var(--invite-gold-on-dark) !important;
+}
+
+.invite-experience .rsvp-section :is(input, select, textarea) {
+  border-color: var(--invite-gold-on-dark) !important;
+  background: rgba(37, 45, 27, 0.45) !important;
+  color: var(--invite-white) !important;
+}
+
+.invite-experience .rsvp-section :is(input, textarea)::placeholder {
+  color: var(--invite-gold-on-dark) !important;
+}
+
+.invite-experience .rsvp-section select option {
+  background: var(--invite-ink);
+  color: var(--invite-white);
+}
+
+.invite-experience .rsvp-section button[type="submit"] {
+  border: 1px solid var(--invite-gold-on-dark) !important;
+  background: var(--invite-ink) !important;
+  color: var(--invite-white) !important;
+}
+
+.invite-experience :is(.invite-copy, .family-closing, .event-poetry, .reception-story) {
+  font-style: normal !important;
+}
