@@ -16,7 +16,7 @@ export type GuestResponse = {
 };
 
 export const eventInfo = {
-  coupleNames: "Mădălin & Mihaela",
+  coupleNames: "Mihaela & Mădălin",
   date: "2027-06-05T15:00:00",
   dateLabel: "05 Iunie 2027",
   rsvpDeadline: "02.05.2027",

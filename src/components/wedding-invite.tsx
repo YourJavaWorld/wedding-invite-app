@@ -78,23 +78,35 @@ export function WeddingInvite({ inviteeName }: { inviteeName?: string }) {
 
     const sections = document.querySelectorAll<HTMLElement>('.invite-page .invite-reveal');
     if (!('IntersectionObserver' in window)) {
-      sections.forEach((section) => section.classList.add('is-revealed'));
-      return;
+      sections.forEach((section) => {
+        Array.from(section.children).forEach((item) => item.classList.add('is-revealed'));
+        section.closest('.timeline-event')?.classList.add('has-revealed');
+      });      return;
     }
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          entry.target.classList.add('is-revealed');
-          observer.unobserve(entry.target);
-        });
+        const item = entry.target as HTMLElement;
+          item.classList.toggle('is-revealed', entry.isIntersecting);
+          if (entry.isIntersecting) {
+            item.closest('.timeline-event')?.classList.add('has-revealed');
+          }
+                });
       },
-      { threshold: 0.12, rootMargin: '0px 0px -6% 0px' },
+      { threshold: 0.08, rootMargin: '0px 0px -18% 0px' },
     );
 
-    sections.forEach((section) => observer.observe(section));
-    return () => observer.disconnect();
+ sections.forEach((section) => {
+      const items = Array.from(section.children).filter((item) => item.tagName !== 'FORM');
+      const form = section.querySelector('form');
+      if (form) items.push(...Array.from(form.children));
+
+      items.forEach((item) => {
+        item.classList.add('invite-reveal-item');
+        observer.observe(item);
+      });
+    });    return () => observer.disconnect();
   }, [canScroll]);
 
   const countdownItems = useMemo(
@@ -137,11 +149,10 @@ export function WeddingInvite({ inviteeName }: { inviteeName?: string }) {
     openedDoors.current.clear();
     setIsOpening(true);
     setCanScroll(true);
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     openingTimeout.current = window.setTimeout(() => {
       setHasEntered(true);
       openingTimeout.current = null;
-    }, reducedMotion ? 700 : 4250);
+    }, 5250);
   };
 
   const handleDoorTransitionEnd = (
@@ -163,11 +174,11 @@ export function WeddingInvite({ inviteeName }: { inviteeName?: string }) {
 
   return (
     <div className="invite-experience invite-background min-h-screen px-2 py-6 text-[#35281f] sm:px-4 sm:py-16">
-      <div aria-hidden="true" className="ambient-petals">
+      {/* <div aria-hidden="true" className="ambient-petals">
         {Array.from({ length: 12 }, (_, index) => (
           <span key={index} />
         ))}
-      </div>
+      </div> */}
 
       <main
         aria-hidden={!canScroll}
@@ -201,9 +212,9 @@ export function WeddingInvite({ inviteeName }: { inviteeName?: string }) {
                 Cu binecuvântarea părinților noștri
               </p>
               <div className="family-names">
-                <p>Elena și Cristian Savin</p>
+                 <p>Gabriela și Viorel Bălău</p>
                 <span aria-hidden="true">&amp;</span>
-                <p>Gabriela și Viorel Bălău</p>
+                 <p>Elena și Cristian Savin</p>
               </div>
               <svg aria-hidden="true" className="family-ornament" viewBox="0 0 180 36" fill="none">
                 <path d="M90 18H28m124 0H90M90 18c-9-12-19-12-27-8 5 8 14 10 27 8Zm0 0c9-12 19-12 27-8-5 8-14 10-27 8Zm0 0c-9 12-19 12-27 8 5-8 14-10 27-8Zm0 0c9 12 19 12 27 8-5-8-14-10-27-8Z" />
@@ -222,12 +233,12 @@ export function WeddingInvite({ inviteeName }: { inviteeName?: string }) {
               <div className="event-timeline">
                 <section className="timeline-event church-event invite-reveal" aria-label="Cununia religioasă">
                   <svg aria-hidden="true" className="event-illustration church-illustration" viewBox="0 0 96 80" fill="none">
-                    <path pathLength="1" d="M14 68h68M20 68V37l28-19 28 19v31M34 68V45h28v23M44 68V52h8v16M48 10v13m-6-7h12M26 40h44M12 68h72" />
-                    <path pathLength="1" d="M17 37 48 16l31 21M36 45v8m24-8v8" />
+                    <path pathLength="1" d="M48 10v13m-6-7h12M18 38 48 18l30 20M24 37v31m48-31v31M17 68h62M31 68V45h34v23M43 68V54a5 5 0 0 1 10 0v14" />
+                    <path pathLength="1" d="M29 36h38M48 27v8m-23 5h46M37 49h22" />
                   </svg>
                   <div className="event-highlight">
-                    <span className="timeline-time">{eventInfo.ceremony.time}</span>
                     <span className="event-highlight-note">Cununia religioasă</span>
+                    <span className="timeline-time">{eventInfo.ceremony.time}</span>
                   </div>
                   <h2 className="timeline-label">Un legământ binecuvântat</h2>
                   <h3 className="timeline-venue">{eventInfo.ceremony.venue}</h3>
@@ -240,12 +251,13 @@ export function WeddingInvite({ inviteeName }: { inviteeName?: string }) {
 
                 <section className="timeline-event reception-event invite-reveal" aria-label="Petrecerea">
                   <svg aria-hidden="true" className="event-illustration reception-illustration" viewBox="0 0 96 80" fill="none">
-                    <path pathLength="1" d="m30 19 6 25a10 10 0 0 0 20 0l6-25H30Zm16 35v15m-12 0h24M62 29h14l-4 17a8 8 0 0 1-16 1M65 55v14m-9 0h18M17 18l2 5m-8 8 5 2m46-18 2-5m9 10 5-2" />
-                    <path pathLength="1" d="M39 32h14m12 4h9" />
+                    <path pathLength="1" d="M23 18h22l-3 18a8 8 0 0 1-16 0l-3-18Zm11 28v15m-10 3h20" transform="rotate(-12 34 40)" />
+                    <path pathLength="1" d="M51 18h22l-3 18a8 8 0 0 1-16 0l-3-18Zm11 28v15m-10 3h20" transform="rotate(12 62 40)" />
+                    <path pathLength="1" d="m47 14 2 4 4 1-4 2-2 4-2-4-4-2 4-1 2-4Zm-25 8 1 2 2 1-2 1-1 2-1-2-2-1 2-1 1-2m51 0 1 2 2 1-2 1-1 2-1-2-2-1 2-1 1-2" />
                   </svg>
                   <div className="event-highlight">
-                    <span className="timeline-time">{eventInfo.reception.time}</span>
                     <span className="event-highlight-note">Petrecerea</span>
+                    <span className="timeline-time">{eventInfo.reception.time}</span>
                   </div>
                   <h2 className="timeline-label">O seară de sărbătoare</h2>
                   <h3 className="timeline-venue">{eventInfo.reception.venue}</h3>
@@ -464,6 +476,7 @@ export function WeddingInvite({ inviteeName }: { inviteeName?: string }) {
 
       <section
         aria-hidden={canScroll}
+        onClick={openInvitation}
         className={`glass-door-intro ${isOpening ? 'is-opening' : ''} ${hasEntered ? 'is-scroll-unlocked is-dismissed' : ''}`}
         aria-label="Deschide ușile pentru a vedea invitația de nuntă"
         inert={canScroll}
@@ -491,9 +504,8 @@ export function WeddingInvite({ inviteeName }: { inviteeName?: string }) {
             <button
               type="button"
               className="wax-seal"
-              onClick={openInvitation}
               disabled={isOpening}
-              aria-label="Deschide ușile apăsând sigiliul M și M"
+              aria-label="Deschide ușile"
             >
               <span aria-hidden="true" className="wax-seal-lettering">
                 <span className="wax-seal-initial">M</span>
