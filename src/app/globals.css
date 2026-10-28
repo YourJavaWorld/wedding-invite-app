@@ -542,7 +542,7 @@ h4 {
 
 .family-names span {
   color: #71502e;
-  font-family: var(--font-seal), cursive;
+  font-family: var(--font-display), Georgia, serif;
   font-size: 1.8rem;
 }
 
@@ -700,6 +700,7 @@ h4 {
 .timeline-label {
   margin-top: 0.55rem;
   color: #604329;
+  font-family: var(--font-display), Georgia, serif;
   font-size: 0.63rem;
   font-weight: 600;
   letter-spacing: 0.24em;
@@ -894,6 +895,7 @@ h4 {
 .countdown-welcome {
   margin-top: 2rem;
   color: #5b432e;
+  font-family: var(--font-display), Georgia, serif;
   font-size: clamp(1.8rem, 6vw, 2.5rem);
   text-align: center;
 }
