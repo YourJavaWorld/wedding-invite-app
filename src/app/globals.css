@@ -422,7 +422,7 @@ h4 {
 .invite-hero-eyebrow {
   margin-bottom: 1.6rem;
   color: #234b32;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   font-weight: 600;
   letter-spacing: 0.35em;
   text-transform: uppercase;
@@ -1146,16 +1146,16 @@ h4 {
 
 @media (max-width: 640px) {
   .invite-experience {
-    padding-right: 0.75rem;
-    padding-left: 0.75rem;
+    padding: 0;
   }
 
   .invitation-paper {
-    max-width: 32rem;
+    max-width: none;
+    border: 0;
   }
 
   .invite-hero {
-    min-height: min(760px, calc(100svh - 1.5rem));
+    min-height: 100svh;
     background-position: center;
   }
 
