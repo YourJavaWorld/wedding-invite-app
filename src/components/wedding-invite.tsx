@@ -137,11 +137,10 @@ export function WeddingInvite({ inviteeName }: { inviteeName?: string }) {
     openedDoors.current.clear();
     setIsOpening(true);
     setCanScroll(true);
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     openingTimeout.current = window.setTimeout(() => {
       setHasEntered(true);
       openingTimeout.current = null;
-    }, reducedMotion ? 700 : 4250);
+    }, 5250);
   };
 
   const handleDoorTransitionEnd = (

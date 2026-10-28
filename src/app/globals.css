@@ -2,7 +2,7 @@
 
 :root {
   --background: #f4ecdf;
-  /* --foreground: #35281f; */
+  --foreground: #35281f;
  --invite-forest: #687653;
   --invite-forest-deep: #526341;
   --invite-gold: #d3aa58;
@@ -1143,47 +1143,4 @@ h4 {
     font-size: 1.5rem;
     line-height: 1.2;
   }
-
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-
-  .ambient-petals span {
-    animation: none;
-  }
-
-  .invite-reveal,
-  .invite-reveal.is-revealed {
-    clip-path: none;
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
-
-  .hero-ornament,
-  .invite-hero-names,
-  .invite-hero-divider svg,
-  .invite-scroll-cue span,
-  .family-ornament path,
-  .family-ornament circle,
-  .invite-closing-heart,
-  .event-illustration path {
-    animation: none;
-  }
-
-  .event-illustration path {
-    stroke-dashoffset: 0;
-  }
-
-  .glass-door-intro,
-  .glass-door,
-  .wax-seal,
-  .wax-seal-wrap {
-    transition-duration: 0.55s;
-    transition-delay: 0ms;
-  }
-
 }
