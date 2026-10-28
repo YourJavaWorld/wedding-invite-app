@@ -142,18 +142,19 @@ h4 {
   transition-delay: 0s;
 }
 
-.invite-reveal {
-  opacity: 0.28;
-  filter: saturate(0.55) brightness(1.18);  clip-path: inset(5% 0 5% 0 round 48% 48% 0 0);
-  transform: translateY(24px);
+.invite-reveal-item {
+  opacity: 0.3;
+  filter: saturate(0.55) brightness(1.16);
+  clip-path: inset(5% 0 5% 0 round 48% 48% 0 0);
+  transform: translateY(14px);
   transition:
-    opacity 850ms ease,
-    filter 850ms ease,
-    clip-path 1000ms cubic-bezier(0.22, 1, 0.36, 1),
-    transform 850ms cubic-bezier(0.22, 1, 0.36, 1);
+    opacity 700ms ease,
+    filter 700ms ease,
+    clip-path 800ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.invite-reveal.is-revealed {
+.invite-reveal-item.is-revealed {
   opacity: 1;
   filter: none;
   clip-path: inset(0 round 0);
@@ -332,7 +333,7 @@ h4 {
   color: #35281f;
   border: 1px solid rgba(184, 152, 93, 0.72);
   background: var(--invite-paper);
-  box-shadow: 0 28px 90px rgba(10, 16, 8, 0.32), 0 0 0 7px rgba(184, 152, 93, 0.08);
+  /* box-shadow: 0 28px 90px rgba(10, 16, 8, 0.32), 0 0 0 7px rgba(184, 152, 93, 0.08); */
 }
 
 .invitation-script {
@@ -645,7 +646,7 @@ h4 {
   stroke-dashoffset: 1;
 }
 
-.invite-reveal.is-revealed .event-illustration path {
+.timeline-event.has-revealed .event-illustration path {
   animation: event-line-draw 1.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 

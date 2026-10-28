@@ -78,21 +78,35 @@ export function WeddingInvite({ inviteeName }: { inviteeName?: string }) {
 
     const sections = document.querySelectorAll<HTMLElement>('.invite-page .invite-reveal');
     if (!('IntersectionObserver' in window)) {
-      sections.forEach((section) => section.classList.add('is-revealed'));
-      return;
+      sections.forEach((section) => {
+        Array.from(section.children).forEach((item) => item.classList.add('is-revealed'));
+        section.closest('.timeline-event')?.classList.add('has-revealed');
+      });      return;
     }
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-        entry.target.classList.toggle('is-revealed', entry.isIntersecting);
-        });
+        const item = entry.target as HTMLElement;
+          item.classList.toggle('is-revealed', entry.isIntersecting);
+          if (entry.isIntersecting) {
+            item.closest('.timeline-event')?.classList.add('has-revealed');
+          }
+                });
       },
-      { threshold: 0.12, rootMargin: '0px 0px -6% 0px' },
+      { threshold: 0.08, rootMargin: '0px 0px -18% 0px' },
     );
 
-    sections.forEach((section) => observer.observe(section));
-    return () => observer.disconnect();
+ sections.forEach((section) => {
+      const items = Array.from(section.children).filter((item) => item.tagName !== 'FORM');
+      const form = section.querySelector('form');
+      if (form) items.push(...Array.from(form.children));
+
+      items.forEach((item) => {
+        item.classList.add('invite-reveal-item');
+        observer.observe(item);
+      });
+    });    return () => observer.disconnect();
   }, [canScroll]);
 
   const countdownItems = useMemo(
