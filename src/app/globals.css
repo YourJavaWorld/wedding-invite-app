@@ -527,9 +527,21 @@ h4 {
 }
 
 .invite-family {
+  position: relative;
   border-top: 2px solid rgba(211, 170, 88, 0.76);
   padding: clamp(4rem, 12vw, 6rem) clamp(1.5rem, 6vw, 3rem);
   background: var(--invite-paper);
+}
+
+.invite-family::before {
+  position: absolute;
+  top: -2px;
+  left: 50%;
+  width: 3rem;
+  height: 4px;
+  background: var(--invite-gold);
+  content: "";
+  transform: translateX(-50%);
 }
 
 .invite-family-greeting {
