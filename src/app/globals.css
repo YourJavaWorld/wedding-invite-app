@@ -524,7 +524,7 @@ h4 {
 }
 
 .invite-family {
-  border-top: 1px solid rgba(211, 170, 88, 0.76);
+  border-top: 2px solid rgba(211, 170, 88, 0.76);
   padding: clamp(4rem, 12vw, 6rem) clamp(1.5rem, 6vw, 3rem);
   background: var(--invite-paper);
 }
