@@ -440,7 +440,7 @@ h4 {
 .invite-hero-names {
   max-width: 100%;
   margin-top: 0;
-  color: #234b32;
+  color: #1c3e29;
   font-size: clamp(3rem, 12vw, 5rem);
   line-height: 0.98;
   text-wrap: balance;
@@ -524,7 +524,7 @@ h4 {
 }
 
 .invite-family {
-  border-top: 1px solid rgba(70, 48, 31, 0.2);
+  border-top: 1px solid rgba(211, 170, 88, 0.76);
   padding: clamp(4rem, 12vw, 6rem) clamp(1.5rem, 6vw, 3rem);
   background: var(--invite-paper);
 }
@@ -675,8 +675,8 @@ h4 {
 }
 
 .event-illustration {
-  width: 86px;
-  height: 72px;
+  width: 96px;
+  height: 80px;
   margin: 0 auto 1.2rem;
   overflow: visible;
   color: #a98b58;
