@@ -573,7 +573,7 @@ h4 {
   margin-left: auto;
   color: #392b22;
   font-family: var(--font-display), Georgia, serif;
-  font-size: clamp(1.15rem, 3.8vw, 1.5rem);
+  font-size: clamp(1.25rem, 4.2vw, 1.60rem);
   letter-spacing: 0;
   line-height: 1.55;
   text-transform: none;
@@ -591,7 +591,7 @@ h4 {
   margin: 1.2rem auto 0;
   color: #392b22;
   font-family: var(--font-display), Georgia, serif;
-  font-size: clamp(1.15rem, 3.8vw, 1.5rem);
+  font-size: clamp(1.25rem, 4.2vw, 1.60rem);
 }
 
 .family-names span {
@@ -626,7 +626,7 @@ h4 {
   margin: 0.7rem auto 0;
   color: #392b22;
   font-family: var(--font-display), Georgia, serif;
-  font-size: clamp(1.15rem, 3.8vw, 1.5rem);
+  font-size: clamp(1.25rem, 4.2vw, 1.60rem);
 }
 
 .family-closing {
@@ -644,7 +644,7 @@ h4 {
   box-shadow: 0 8px 24px rgba(57, 68, 49, 0.12);
   color: #ebdeba;
   font-family: var(--font-display), Georgia, serif;
-  font-size: clamp(1.15rem, 3.8vw, 1.5rem);
+  font-size: clamp(1.2rem, 4vw, 1.55rem);
   /* font-style: italic; */
   line-height: 1.65;
 }
