@@ -440,9 +440,10 @@ h4 {
 .invite-hero-names {
   max-width: 100%;
   margin-top: 0;
-  color: #1c3e29;
-  font-size: clamp(3rem, 12vw, 5rem);
-  line-height: 0.98;
+  color: #173a27;
+  font-size: clamp(3.4rem, 13vw, 5.8rem);
+  line-height: 1.04;
+  text-shadow: 0 1px 0 rgba(255, 250, 240, 0.95), 0 3px 14px rgba(255, 248, 232, 0.85);
   text-wrap: balance;
   animation: names-arrive 1.2s both;
 }
@@ -481,10 +482,12 @@ h4 {
 
 .invite-hero-date {
   margin-top: 1rem;
-  color: #234b32;
+  color: #49341f;
   font-family: var(--font-display), Georgia, serif;
-  font-size: clamp(1.35rem, 5vw, 2.15rem);
-  letter-spacing: 0.08em;
+  font-size: clamp(1.5rem, 5.5vw, 2.3rem);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-shadow: 0 1px 0 rgba(255, 250, 240, 0.95), 0 2px 10px rgba(255, 248, 232, 0.85);
 }
 
 .invite-scroll-cue {
@@ -524,9 +527,21 @@ h4 {
 }
 
 .invite-family {
+  position: relative;
   border-top: 2px solid rgba(211, 170, 88, 0.76);
   padding: clamp(4rem, 12vw, 6rem) clamp(1.5rem, 6vw, 3rem);
   background: var(--invite-paper);
+}
+
+.invite-family::before {
+  position: absolute;
+  top: -2px;
+  left: 50%;
+  width: 3rem;
+  height: 4px;
+  background: var(--invite-gold);
+  content: "";
+  transform: translateX(-50%);
 }
 
 .invite-family-greeting {
@@ -774,9 +789,9 @@ h4 {
 .event-poetry {
   max-width: 28rem;
   margin: 1rem auto 0;
-  color: #514638;
+  color: #433a2e;
   font-family: var(--font-display), Georgia, serif;
-  font-size: clamp(1rem, 4.5vw, 1.15rem);
+  font-size: clamp(1.05rem, 4.7vw, 1.2rem);
   /* font-style: italic; */
   line-height: 1.7;
 }
@@ -806,9 +821,9 @@ h4 {
 .reception-story {
   max-width: 28rem;
   margin: 1rem auto 0;
-  color: #514638;
+  color: #433a2e;
   font-family: var(--font-display), Georgia, serif;
-  font-size: clamp(1rem, 4.5vw, 1.15rem);
+  font-size: clamp(1.05rem, 4.7vw, 1.2rem);
   /* font-style: italic; */
   line-height: 1.55;
 }
