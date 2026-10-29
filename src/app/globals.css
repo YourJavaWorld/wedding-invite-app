@@ -777,9 +777,9 @@ h4 {
 .event-poetry {
   max-width: 28rem;
   margin: 1rem auto 0;
-  color: #514638;
+  color: #433a2e;
   font-family: var(--font-display), Georgia, serif;
-  font-size: clamp(1rem, 4.5vw, 1.15rem);
+  font-size: clamp(1.05rem, 4.7vw, 1.2rem);
   /* font-style: italic; */
   line-height: 1.7;
 }
@@ -809,9 +809,9 @@ h4 {
 .reception-story {
   max-width: 28rem;
   margin: 1rem auto 0;
-  color: #514638;
+  color: #433a2e;
   font-family: var(--font-display), Georgia, serif;
-  font-size: clamp(1rem, 4.5vw, 1.15rem);
+  font-size: clamp(1.05rem, 4.7vw, 1.2rem);
   /* font-style: italic; */
   line-height: 1.55;
 }
